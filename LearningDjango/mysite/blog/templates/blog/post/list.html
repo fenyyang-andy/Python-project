@@ -1,0 +1,19 @@
+{% extends "blog/base.html" %}
+
+{% block title %}
+    My first blog
+{% endblock %}
+
+{% block content %}
+<h1>My Blog List</h1>
+  {% for post in posts %}
+
+  <!--<h2><a href="{{ post.id}}">{{post.title}}</h2>-->  
+   
+  <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+  <!-- h2的內容要調用models中的def get_absolute_url數據，才能以year/month/day/post的形式存儲在數據庫中，urls中才能匹配正則表達式-->
+  <p>Published {{ post.published }} by {{ post.author }}</p>
+  {% endfor %}
+  {% include 'blog/post/pagination.html' %}
+{% endblock %}
+
